@@ -11,6 +11,8 @@ require '../vendor/libs/functions.php';
 Router::add('^$', ['controller' => 'Main', 'action' => 'index']);
 Router::add('[a-z-]+/[a-z-]+', ['controller' => 'Main', 'action' => 'index']);
 
+// Коммент с Redmi
+
 debug(Router::getRoutes());
 
 if(Router::matchRoute($query)) {
