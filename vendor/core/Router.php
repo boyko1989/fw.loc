@@ -1,5 +1,11 @@
 <?php
 
+namespace vendor\core;
+
+/**
+ * Описание класса Маршрутизатора
+ */
+
 class Router {
 //    public function __construct() {
 //        echo 'Привет, мир';        
@@ -72,7 +78,7 @@ class Router {
      */
     public static function dispatch($url) {
         if(self::matchRoute($url)){
-            $controller = self::upperCamelCase(self::$route['controller']);
+            $controller = 'app\controllers' . self::upperCamelCase(self::$route['controller']);
             if(class_exists($controller)){
                 $cObj = new $controller;
                 $action = self::lowerCamelCase(self::$route['action']).'Action';
