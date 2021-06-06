@@ -25,6 +25,8 @@ Router::add('^$', ['controller' => 'Main', 'action' => 'index']);
 Router::add('^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$');
 
 // Коммент с Redmi
+// Данный комментарий из редактора QuickEdit для Android
+// Считаю для себя этот редактор наилучшим вариантом для удалённой разработки
 
 debug(Router::getRoutes());
 
