@@ -14,7 +14,6 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/main.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -46,6 +45,7 @@
   </header>
 
   <main>
+      <h1>MAIN</h1>
       <p><?=$content?></p>
       
     
