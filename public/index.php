@@ -2,8 +2,7 @@
     error_reporting(-1);
 
     use vendor\core\Router;
-
-    $query = rtrim(ltrim($_SERVER['REQUEST_URI'], '/'), '/');
+    $query = rtrim($_SERVER['QUERY_STRING'], '/');
 
     define('WWW', __DIR__);
     define('CORE', dirname(__DIR__) . '/vendor/core');
@@ -11,6 +10,7 @@
     define('APP', dirname(__DIR__) . '/app');
 
     require '../vendor/libs/functions.php';
+    debug($_GET);
 
     spl_autoload_register(function($class){
         $file = ROOT . '/' . str_replace('\\', '/', $class) . '.php';
@@ -19,7 +19,8 @@
         }
     });
 
-    Router::add('^pages/?(?P<action>[a-z-]+)?$', ['controller' => 'Posts']);
+//    Router::add('^page/(?P<action>[a-z-]+)/(?P<alias>[a-z-]+)$', ['controller' => 'Page']);
+    Router::add('^page/(?P<alias>[a-z-]+)$', ['controller' => 'Page', 'action' => 'view']);
 
     // defaults routs
     Router::add('^$', ['controller' => 'Main', 'action' => 'index']);

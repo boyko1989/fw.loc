@@ -78,6 +78,8 @@ class Router {
      * @return void
      */
     public static function dispatch($url) {
+        $url = self::removeQueryString($url);
+        var_dump($url);
         if(self::matchRoute($url)){
             $controller = 'app\controllers\\' . self::$route['controller'];
             if(class_exists($controller)){
@@ -97,8 +99,8 @@ class Router {
         }
     }
     /**
-     * Приводит имя контроллера к CamelCase с первой буквы
-     * @param string $name
+     * Преобразует имена к CamelCase с первой буквы
+     * @param string $name строка для преобразования
      * @return string
      */
     protected static function upperCamelCase($name) {
@@ -106,12 +108,26 @@ class Router {
     }
     
     /**
-     * Приводит имя контроллера к CamelCase со второго слова
-     * @param string $name
+     * Преобразует имена к CamelCase со второго слова
+     * @param string $name строка для преобразования
      * @return string
      */
     protected static function lowerCamelCase($name) {
         // return str_replace(' ', '', ucwords(str_replace('-', ' ', $name)));
         return lcfirst(self::upperCamelCase($name));
     }
+    
+    protected static function removeQueryString($url) {
+        if($url){
+            $params = explode('&', $url, 2);
+            if(false === strpos($params[0], '=')) {
+                return rtrim($params[0], '/');
+            } else {
+                return '';
+            }
+        }
+        debug($url);
+        return $url;
+    }
+    
 }

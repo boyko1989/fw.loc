@@ -6,13 +6,7 @@ namespace app\controllers;
  *
  * @author pboyk
  */
-class Posts {
-    
-    public $route = [];
-    
-    public function __construct($route) {
-        $this->route = $route;
-    }
+class Posts extends \vendor\core\base\Controller {
     
     public function indexAction() {
         echo 'Posts::index;';
