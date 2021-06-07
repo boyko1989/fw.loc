@@ -6,7 +6,7 @@ namespace app\controllers;
  *
  * @author pboyk
  */
-class PostsNew {
+class PostsNew extends App {
     public function indexAction() {
         echo 'PostsNew::index;';
     }

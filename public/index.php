@@ -8,9 +8,9 @@
     define('CORE', dirname(__DIR__) . '/vendor/core');
     define('ROOT', dirname(__DIR__));
     define('APP', dirname(__DIR__) . '/app');
+    define('LAYOUT', 'default');
 
     require '../vendor/libs/functions.php';
-    debug($_GET);
 
     spl_autoload_register(function($class){
         $file = ROOT . '/' . str_replace('\\', '/', $class) . '.php';
@@ -18,18 +18,10 @@
             require_once $file;
         }
     });
-
-//    Router::add('^page/(?P<action>[a-z-]+)/(?P<alias>[a-z-]+)$', ['controller' => 'Page']);
     Router::add('^page/(?P<alias>[a-z-]+)$', ['controller' => 'Page', 'action' => 'view']);
 
     // defaults routs
     Router::add('^$', ['controller' => 'Main', 'action' => 'index']);
     Router::add('^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$');
-
-    // Коммент с Redmi
-    // Данный комментарий из редактора QuickEdit для Android
-    // Считаю для себя этот редактор наилучшим вариантом для удалённой разработки
-
-    debug(Router::getRoutes());
 
     Router::dispatch($query);
