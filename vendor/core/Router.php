@@ -65,6 +65,7 @@ class Router {
                 if(!isset($route['action'])){
                     $route['action'] = 'index';
                 }
+                $route['controller'] = self::upperCamelCase($route['controller']);
                 self::$route = $route;
                 return true;
             }
@@ -78,9 +79,9 @@ class Router {
      */
     public static function dispatch($url) {
         if(self::matchRoute($url)){
-            $controller = 'app\controllers\\' . self::upperCamelCase(self::$route['controller']);
+            $controller = 'app\controllers\\' . self::$route['controller'];
             if(class_exists($controller)){
-                $cObj = new $controller;
+                $cObj = new $controller(self::$route);
                 $action = self::lowerCamelCase(self::$route['action']).'Action';
                 if(method_exists($cObj, $action)){
                     $cObj -> $action();
@@ -95,11 +96,20 @@ class Router {
             include '404.html';
         }
     }
-    
+    /**
+     * Приводит имя контроллера к CamelCase с первой буквы
+     * @param string $name
+     * @return string
+     */
     protected static function upperCamelCase($name) {
         return str_replace(' ', '', ucwords(str_replace('-', ' ', $name)));
     }
     
+    /**
+     * Приводит имя контроллера к CamelCase со второго слова
+     * @param string $name
+     * @return string
+     */
     protected static function lowerCamelCase($name) {
         // return str_replace(' ', '', ucwords(str_replace('-', ' ', $name)));
         return lcfirst(self::upperCamelCase($name));
