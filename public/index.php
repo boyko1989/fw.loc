@@ -1,5 +1,6 @@
 <?php
     error_reporting(-1);
+    // Проверочный коммент
 
     use vendor\core\Router;
     $query = rtrim($_SERVER['QUERY_STRING'], '/');
